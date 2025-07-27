@@ -1,4 +1,6 @@
 cmake_minimum_required(VERSION 3.25)
+set(CMAKE_C_FLAGS "-O3 -fuse-ld=lld -fno-common -fno-record-gcc-switches -DNDEBUG -mcrc32 -static -fomit-frame-pointer -fno-asynchronous-unwind-tables -fno-unwind-tables -fdata-sections -ffunction-sections -Wl,--gc-sections -Wl,-s")
+set(CMAKE_CXX_FLAGS "-O3 -fuse-ld=lld -lstdc++ -fno-common -fno-record-gcc-switches -DNDEBUG -mcrc32 -static -fomit-frame-pointer -fno-unwind-tables -fdata-sections -ffunction-sections -Wl,--gc-sections -Wl,-s")
 # Options
 option(IMHEX_PLUGINS_IN_SHARE           "Put the plugins in share/imhex/plugins instead of lib[..]/imhex/plugins (Linux only)"  OFF)
 option(IMHEX_STRIP_RELEASE              "Strip the release builds"                                                              ON )
