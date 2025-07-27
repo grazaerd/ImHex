@@ -63,6 +63,15 @@ jobs:
       with:
         msystem: ${{ matrix.msystem }}
 
+    - name: ⬇️ Install Clang toolchain
+      run: |
+        set -x
+        pacman -S --needed --noconfirm \
+          mingw-w64-${{ matrix.msystem }}-clang \
+          mingw-w64-${{ matrix.msystem }}-lld \
+          mingw-w64-${{ matrix.msystem }}-llvm \
+          mingw-w64-${{ matrix.msystem }}-compiler-rt
+
     - name: ⬇️ Install dependencies
       run: |
         set -x
@@ -88,6 +97,10 @@ jobs:
           -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }}                                \
           -DCMAKE_INSTALL_PREFIX="$PWD/install"                                   \
           -DIMHEX_GENERATE_PACKAGE=ON                                             \
+          -DCMAKE_C_COMPILER=clang                                                \
+          -DCMAKE_CXX_COMPILER=clang++                                            \
+          -DCMAKE_C_FLAGS="-march=znver2 -static"                                 \
+          -DCMAKE_CXX_FLAGS="-march=znver2 -static"                               \
           -DIMHEX_USE_DEFAULT_BUILD_SETTINGS=ON                                   \
           -DIMHEX_PATTERNS_PULL_MASTER=ON                                         \
           -DIMHEX_COMMIT_HASH_LONG="${GITHUB_SHA}"                                \
