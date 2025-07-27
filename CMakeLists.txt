@@ -1,6 +1,4 @@
 cmake_minimum_required(VERSION 3.25)
-set(CMAKE_C_FLAGS "-march=znver2 -static")
-set(CMAKE_CXX_FLAGS "-march=znver2 -static")
 # Options
 option(IMHEX_PLUGINS_IN_SHARE           "Put the plugins in share/imhex/plugins instead of lib[..]/imhex/plugins (Linux only)"  OFF)
 option(IMHEX_STRIP_RELEASE              "Strip the release builds"                                                              ON )
